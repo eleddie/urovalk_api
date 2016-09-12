@@ -1,0 +1,15 @@
+{
+    "require": {
+        "illuminate/database": "4.2.*",
+        "vlucas/valitron": "^1.2"
+    },
+    "autoload": {
+        "classmap": [
+            "models"
+        ],
+        "files": [
+            "config/database.php",
+            "config/Helpers.php"
+        ]
+    }
+}
