@@ -70,8 +70,9 @@ class ComposerStaticInit604bd5f7f4d283ac0f25cd85c8ed28bb
     );
 
     public static $classMap = array (
-        'Products' => __DIR__ . '/../..' . '/models/Products.php',
-        'Users' => __DIR__ . '/../..' . '/models/Users.php',
+        'Product' => __DIR__ . '/../..' . '/models/Product.php',
+        'Resource' => __DIR__ . '/../..' . '/models/Resource.php',
+        'User' => __DIR__ . '/../..' . '/models/User.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

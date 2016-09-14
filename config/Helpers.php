@@ -5,12 +5,3 @@ function apiResponse($code, $response) {
         'response' => $response
         ]);
 }
-
-/**
-* Response Codes:
-* 1 -> All Correct
-* 2 -> Mandatory parameter missing
-* 3 -> Invalid format
-* 
-*   
-*/

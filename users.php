@@ -5,13 +5,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-class UserResource {
-    protected function validate($fields, $rules){
-        $v = new Valitron\Validator($fields);
-        $v->rules($rules);
-        if (!$v->validate()){
-            die(apiResponse(69, null));
-        }
+class UserResource extends Resource {
+    public function __construct(){
+        return $this;
     }
     public function create($fields){
         $rules = [
@@ -21,10 +17,13 @@ class UserResource {
                 ],
                 'lengthMin' => [
                     ['password', 6]
+                ],
+                'notIn' => [
+                    ['username', User::lists('username') ]
                 ]
         ];
         $this->validate($fields, $rules);
-        return Users::create([
+        return User::create([
             'username' => $fields['username'],
             'password' => hash('sha256', $fields['password'])
         ]);
@@ -41,41 +40,20 @@ class UserResource {
                 ]
         ];
         $this->validate(array_merge($fields, ['id' => $id]), $rules);
-        return Users::where("id", $id)->update($fields);
+        return User::where("id", $id)->update($fields);
     }
     public function delete($id){
         $rules = ['required' => 'id'];
         $this->validate(['id' => $id], $rules);
-        return Users::destroy($id);
+        return User::destroy($id);
     }
     public function index(){
-        return Users::all();
+        return User::all();
     }
     public function show($id){
         $rules = ['required' => 'id'];
         $this->validate(['id' => $id], $rules);
-        return Users::find($id);
+        return User::find($id);
     }
 }
-$method = $_SERVER['REQUEST_METHOD'];
-$users = new UserResource();
-switch($method){
-    case "POST":
-        $response = $users->create($_REQUEST);
-        break; 
-    case "GET";
-        if (isset($_REQUEST['id']))
-            $response = $users->show($_REQUEST['id']);
-        else
-            $response = $users->index();
-        break;
-    case "PUT";
-        $response = $users->update($_REQUEST['id'], $_REQUEST);
-        break;
-    case "DELETE";
-        $response = $users->delete($_REQUEST['id']);
-        break;
-    default:
-        $response = null;
-}
-echo apiResponse(1, $response);
+echo apiResponse(1, Resource::run(new UserResource, $_SERVER['REQUEST_METHOD']));

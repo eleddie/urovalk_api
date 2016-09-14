@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-date_default_timezone_set('Americas/La_Paz');
+date_default_timezone_set('America/La_Paz');
 use Illuminate\Database\Capsule\Manager as Capsule;
 $capsule = new Capsule();
 $capsule->addConnection([
