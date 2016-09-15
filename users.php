@@ -9,6 +9,20 @@ class UserResource extends Resource {
     public function __construct(){
         return $this;
     }
+    public function login(){
+        $rules = [
+                'required' => [
+                    ['username'],
+                    ['token']
+                ]
+        ];
+        $this->validate($fields, $rules);
+        $user = User::where('username', $fields['username'])->where('password', hash('sha256', $fields['token']))->first();
+        if (empty($user))
+            return apiResponse(1, "LoggedIn");
+        else
+            return apiResponse(9, "User not found");
+    }
     public function create($fields){
         $rules = [
                 'required' => [

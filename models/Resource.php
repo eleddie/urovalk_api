@@ -11,7 +11,14 @@ class Resource {
     public static function run($resource, $method){
         switch($method){
             case "POST":
-                $response = $resource->create($_REQUEST);
+                if ($resource instanceof ProductResource)
+                    $response = $resource->create($_REQUEST);
+                else {
+                    if (isset($_REQUEST['password']))
+                        $response = $resource->create($_REQUEST);
+                    else
+                        $response = $resource->login($_REQUEST);
+                }
                 break; 
             case "GET";
                 if (isset($_REQUEST['id']))
