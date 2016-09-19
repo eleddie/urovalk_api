@@ -8,7 +8,8 @@ class ComposerStaticInit604bd5f7f4d283ac0f25cd85c8ed28bb
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '3b5531f8bb4716e1b6014ad7e734f545' => __DIR__ . '/..' . '/illuminate/support/Illuminate/Support/helpers.php',
+        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         'e498698fb6f1e841bf7ec2b12ccada5f' => __DIR__ . '/../..' . '/config/database.php',
         'ae6b95daacff80b36a794990eea93120' => __DIR__ . '/../..' . '/config/Helpers.php',
     );
@@ -18,6 +19,13 @@ class ComposerStaticInit604bd5f7f4d283ac0f25cd85c8ed28bb
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Component\\Translation\\' => 30,
+        ),
+        'I' => 
+        array (
+            'Illuminate\\Support\\' => 19,
+            'Illuminate\\Database\\' => 20,
+            'Illuminate\\Contracts\\' => 21,
+            'Illuminate\\Container\\' => 21,
         ),
         'C' => 
         array (
@@ -34,6 +42,22 @@ class ComposerStaticInit604bd5f7f4d283ac0f25cd85c8ed28bb
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
         ),
+        'Illuminate\\Support\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/support',
+        ),
+        'Illuminate\\Database\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/database',
+        ),
+        'Illuminate\\Contracts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/contracts',
+        ),
+        'Illuminate\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/container',
+        ),
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
@@ -48,23 +72,11 @@ class ComposerStaticInit604bd5f7f4d283ac0f25cd85c8ed28bb
                 0 => __DIR__ . '/..' . '/vlucas/valitron/src',
             ),
         ),
-        'I' => 
+        'D' => 
         array (
-            'Illuminate\\Support' => 
+            'Doctrine\\Common\\Inflector\\' => 
             array (
-                0 => __DIR__ . '/..' . '/illuminate/support',
-            ),
-            'Illuminate\\Events' => 
-            array (
-                0 => __DIR__ . '/..' . '/illuminate/events',
-            ),
-            'Illuminate\\Database' => 
-            array (
-                0 => __DIR__ . '/..' . '/illuminate/database',
-            ),
-            'Illuminate\\Container' => 
-            array (
-                0 => __DIR__ . '/..' . '/illuminate/container',
+                0 => __DIR__ . '/..' . '/doctrine/inflector/lib',
             ),
         ),
     );

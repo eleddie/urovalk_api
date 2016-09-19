@@ -5,11 +5,8 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 $capsule = new Capsule();
 $capsule->addConnection([
     'driver' => 'mysql',
-    //'database' => 'urovalk',
     'database' => 'esgapi',
-    //'username' => 'root',
     'username' => 'esgapi',
-    //'password' => 'root',
     'password' => '965933',
     'charset' => 'utf8',
     'port' => '3306',

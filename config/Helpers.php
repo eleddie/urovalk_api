@@ -1,7 +1,7 @@
 <?php
-function apiResponse($code, $response) {
+function apiResponse($response) {
     return json_encode([
-        'code' => $code,
-        'response' => $response
+        'code' => $response['code'],
+        'response' => $response['response']
         ]);
 }

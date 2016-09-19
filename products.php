@@ -12,42 +12,64 @@ class ProductResource extends Resource {
                     ['name'],
                     ['serial'],
                     ['stock'],
-                    ['price']
+                    ['price'],
+                    ['token']
                 ]
         ];
         $this->validate($fields, $rules);
+        $user = User::where("token", $fields['token'])->first();
+        if(empty($user)){
+            return ["code" => 2, "response" => "Invalid token"];
+        }
         $record = Product::where('serial', $fields['serial'])->first();
         if(empty($record))
-            return Product::create($fields);
+            return ['code' => 1, 'response' => Product::create($fields)];
         else
             $record->stock += $fields['stock'];
-            return $record->save();
+            return ['code' => 1, 'response' => $record->save()];
     }
-    public function update($id, $fields){
+    public function update($fields){
         $rules = [
                 'required' => [
-                    ['name'],
-                    ['serial'],
-                    ['stock'],
-                    ['price'],
-                    ['id']
+                    ['id'],
+                    ['token']
                 ]
         ];
-        $this->validate(array_merge($fields, ['id' => $id]), $rules);
-        return Product::where("id", $id)->update($fields);
+        $this->validate($fields, $rules);
+        return ["code" => 1, "response" => Product::where("id", $id)->update($fields)];
     }
-    public function delete($id){
-        $rules = ['required' => 'id'];
-        $this->validate(['id' => $id], $rules);
-        return Product::destroy($id);
+    public function delete($fields){
+        $rules = [
+                'required' => [
+                    ['id'],
+                    ['token']
+                ]
+        ];
+        $this->validate($fields, $rules);
+        $user = User::where("token", $fields['token'])->first();
+        if(empty($user)){
+            return ["code" => 2, "response" => "Invalid token"];
+        }
+        return ["code" => 1, "response" => Product::destroy($fields['id'])];
     }
-    public function index(){
-        return Product::all();
+    public function index($fields){
+        $rules = ['required' => 'token'];
+        $this->validate($fields, $rules);
+        $user = User::where("token", $fields['token'])->first();
+        if(empty($user)){
+            return ["code" => 2, "response" => "Invalid token"];
+        }
+        return ["code" => 1, "response" => Product::all()];
     }
-    public function show($id){
-        $rules = ['required' => 'id'];
-        $this->validate(['id' => $id], $rules);
-        return Product::find($id);
+    public function show($fields){
+       $rules = [
+                'required' => [
+                    ['id'],
+                    ['token']
+                ]
+       ];
+        $this->validate($fields, $rules);
+        return ["code" => 1, "response" => Product::find($id)];
     }
 }
-echo apiResponse(1, Resource::run(new ProductResource, $_SERVER['REQUEST_METHOD']));
+echo apiResponse(Resource::run(new ProductResource, $_SERVER['REQUEST_METHOD']));
